@@ -1,0 +1,46 @@
+<html>
+<head>
+<script>
+wo = window.onload;
+window.onload = function() {
+			wo && wo.call(null);
+			
+			// Get the image
+			var sampleImage = document.getElementById("ringoImage");
+			canvas = convertImageToCanvas(sampleImage);
+			
+			// Actions
+			document.getElementById("canvasHolder").appendChild(canvas);		  
+			document.getElementById("pngHolder").appendChild(convertCanvasToImage(canvas));
+			
+			// Converts image to canvas; returns new canvas element
+			function convertImageToCanvas(image) {
+				var canvas = document.createElement("canvas");
+				canvas.width = image.width;
+				canvas.height = image.height;
+				canvas.getContext("2d").drawImage(image, 0, 0);
+
+				return canvas;
+			}
+
+			// Converts canvas to an image
+			function convertCanvasToImage(canvas) {
+				var image = new Image();
+				image.setAttribute('crossOrigin', '');
+				image.src = canvas.toDataURL("image/png");
+				return image;
+			}
+		};
+</script>
+</head>
+<body>
+<div>
+<img id = "ringoImage" src="http://i.imgur.com/kYyatxI.jpg" />
+</div>
+<div id="canvasHolder">
+
+</div>
+<div id="pngHolder">
+</div>
+</body>
+</html>
